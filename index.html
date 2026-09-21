@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHOTOBOOTH by griimy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div><p class="eyebrow">DIGITAL MEMORY MAKER</p><h1>PHOTOBOOTH</h1><p class="subtitle">Create your memories your way.</p></div>
+    <div class="camera-status" id="cameraStatus" aria-live="polite"><span></span> Camera: Not Started</div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="controls" aria-label="Photobooth controls">
+      <section class="control-card format-card">
+        <div class="section-heading"><span>01</span><h2>Photo format</h2></div>
+        <div class="format-buttons" role="group" aria-label="Photo format">
+          <button class="choice active" data-format="strip">Photo strip</button>
+          <button class="choice" data-format="landscape">4 : 3</button>
+          <button class="choice" data-format="portrait">9 : 16</button>
+        </div>
+        <div class="strip-options" id="stripOptions"><span>Strip photos</span><button class="mini-choice active" data-strip-count="3">3</button><button class="mini-choice" data-strip-count="4">4</button></div>
+      </section>
+      <section class="control-card">
+        <div class="section-heading"><span>02</span><h2>Filter</h2></div>
+        <select id="filterSelect" aria-label="Choose a photo filter">
+          <option value="normal">Normal</option><option value="nostalgia">2016 Nostalgia</option><option value="oldcamera">Old Camera</option><option value="vhs">VHS</option><option value="polaroid">Polaroid</option><option value="retro">Retro</option><option value="dreamy">Dreamy</option><option value="childhood">Childhood Memory</option>
+        </select>
+      </section>
+      <section class="control-card">
+        <div class="section-heading"><span>03</span><h2>Stickers</h2></div>
+        <div class="asset-grid" id="stickerGrid"><p class="asset-note">Loading stickers…</p></div>
+        <label class="upload-button">+ Upload custom sticker <input id="stickerUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden></label>
+      </section>
+      <section class="control-card">
+        <div class="section-heading"><span>04</span><h2>Frame</h2></div>
+        <div class="asset-grid frame-grid" id="frameGrid"><button class="asset-button active" data-frame="">None</button></div>
+      </section>
+      <section class="control-card text-card">
+        <div class="section-heading"><span>05</span><h2>Add text</h2></div>
+        <input id="textInput" type="text" maxlength="80" placeholder="Write a little memory…" aria-label="Text to add" />
+        <div class="text-options"><select id="fontSelect" aria-label="Font"><option value="Georgia">Classic</option><option value="Arial">Clean</option><option value="Courier New">Typewriter</option><option value="cursive">Handwritten</option></select><input id="textColor" type="color" value="#ffffff" aria-label="Text color" /><input id="fontSize" type="number" min="16" max="160" value="44" aria-label="Font size" /><label class="bold-toggle"><input id="boldText" type="checkbox" /> Bold</label></div>
+        <button class="secondary add-text" id="addText">Add text</button>
+      </section>
+      <section class="control-card action-card">
+        <div class="section-heading"><span>06</span><h2>Camera controls</h2></div>
+        <button class="primary" id="startCamera">Start camera</button><button class="shutter" id="takePhoto" disabled>Take photo <span>●</span></button>
+        <div class="utility-buttons"><button class="secondary" id="retake">Retake</button><button class="secondary danger" id="resetDesign">Reset design</button></div>
+      </section>
+    </aside>
+
+    <section class="studio" aria-label="Camera and photo preview">
+      <div class="preview-topline"><span id="modeLabel">PHOTO STRIP · 3 SHOTS</span><span id="progressLabel">Ready when you are</span></div>
+      <div class="stage" id="stage">
+        <video id="video" autoplay playsinline muted aria-label="Live camera preview"></video>
+        <canvas id="previewCanvas" aria-label="Finished photo preview"></canvas>
+        <div class="empty-state" id="emptyState"><div class="camera-icon">⌑</div><strong>Ready for your close-up</strong><p>Start your camera, pick a filter, then press the shutter.</p></div>
+        <div class="countdown" id="countdown" aria-live="assertive"></div>
+        <div class="selection-box" id="selectionBox" hidden><i class="handle nw"></i><i class="handle ne"></i><i class="handle sw"></i><i class="handle se"></i><button id="deleteObject" aria-label="Delete selected decoration">×</button></div>
+      </div>
+      <div class="preview-actions"><button class="download png" id="downloadPng" disabled>Download PNG</button><button class="download" id="downloadJpg" disabled>Download JPG</button></div>
+      <p class="privacy">🔒 Your photos stay in your browser and are not uploaded.</p>
+      <p class="message" id="message" role="alert"></p>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
