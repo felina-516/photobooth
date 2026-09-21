@@ -26,13 +26,15 @@
       <section class="control-card">
         <div class="section-heading"><span>02</span><h2>Filter</h2></div>
         <select id="filterSelect" aria-label="Choose a photo filter">
-          <option value="normal">Normal</option><option value="nostalgia">2016 Nostalgia</option><option value="oldcamera">Old Camera</option><option value="vhs">VHS</option><option value="polaroid">Polaroid</option><option value="retro">Retro</option><option value="dreamy">Dreamy</option><option value="childhood">Childhood Memory</option>
+          <option value="normal">Normal</option><option value="nostalgia">2016 Nostalgia</option><option value="oldcamera">Old Camera</option><option value="vhs">VHS</option><option value="polaroid">Polaroid</option><option value="retro">Retro</option><option value="dreamy">Dreamy</option><option value="childhood">Childhood Memory</option><option value="cloudy">Cloudy</option>
         </select>
       </section>
       <section class="control-card">
         <div class="section-heading"><span>03</span><h2>Stickers</h2></div>
         <div class="asset-grid" id="stickerGrid"><p class="asset-note">Loading stickers…</p></div>
         <label class="upload-button">+ Upload custom sticker <input id="stickerUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden></label>
+        <label class="face-toggle"><input id="faceStickerMode" type="checkbox" /> Place next sticker on my face <small>(when supported)</small></label>
+        <select id="faceStickerType" aria-label="Face sticker type"><option value="face">Face decoration</option><option value="glasses">Glasses / sunglasses</option><option value="hat">Hat / headwear</option></select>
       </section>
       <section class="control-card">
         <div class="section-heading"><span>04</span><h2>Frame</h2></div>
@@ -41,7 +43,7 @@
       <section class="control-card text-card">
         <div class="section-heading"><span>05</span><h2>Add text</h2></div>
         <input id="textInput" type="text" maxlength="80" placeholder="Write a little memory…" aria-label="Text to add" />
-        <div class="text-options"><select id="fontSelect" aria-label="Font"><option value="Georgia">Classic</option><option value="Arial">Clean</option><option value="Courier New">Typewriter</option><option value="cursive">Handwritten</option></select><input id="textColor" type="color" value="#ffffff" aria-label="Text color" /><input id="fontSize" type="number" min="16" max="160" value="44" aria-label="Font size" /><label class="bold-toggle"><input id="boldText" type="checkbox" /> Bold</label></div>
+        <div class="text-options"><select id="fontSelect" aria-label="Font"><option value="Arial, sans-serif">Normal</option><option value="Georgia, serif">Retro</option><option value="'Courier New', monospace">Typewriter</option><option value="cursive">Handwritten</option><option value="Impact, fantasy">Comic</option><option value="'Arial Rounded MT Bold', Arial, sans-serif">Bubble</option><option value="monospace">Minecraft / Pixel</option><option value="Arial Black, Arial, sans-serif">Bold</option></select><input id="textColor" type="color" value="#ffffff" aria-label="Text color" /><input id="fontSize" type="number" min="16" max="160" value="44" aria-label="Font size" /><label class="bold-toggle"><input id="boldText" type="checkbox" /> Bold</label></div>
         <button class="secondary add-text" id="addText">Add text</button>
       </section>
       <section class="control-card action-card">
@@ -55,6 +57,8 @@
       <div class="preview-topline"><span id="modeLabel">PHOTO STRIP · 3 SHOTS</span><span id="progressLabel">Ready when you are</span></div>
       <div class="stage" id="stage">
         <video id="video" autoplay playsinline muted aria-label="Live camera preview"></video>
+        <canvas id="liveCanvas" aria-label="Live mirrored camera preview"></canvas>
+        <img id="liveFrame" alt="Selected frame preview" />
         <canvas id="previewCanvas" aria-label="Finished photo preview"></canvas>
         <div class="empty-state" id="emptyState"><div class="camera-icon">⌑</div><strong>Ready for your close-up</strong><p>Start your camera, pick a filter, then press the shutter.</p></div>
         <div class="countdown" id="countdown" aria-live="assertive"></div>
